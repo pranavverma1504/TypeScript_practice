@@ -60,6 +60,23 @@ const authOptions:NextAuthOptions={
 
     ],
     callbacks:{
+
+        //google se register karane k liye
+                async signIn({account,user}) {
+            if(account?.provider=="google"){
+                await connectDb()
+                let existUser=await User.findOne({email:user?.email})
+                if(!existUser){
+                     existUser=await User.create({
+                        name:user.name,
+                        email:user?.email
+                    })
+                }
+           user.id=existUser._id as string
+              
+            }
+            return true
+        },
         // token ke ander user details daali
       
        
