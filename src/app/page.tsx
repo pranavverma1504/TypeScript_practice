@@ -1,12 +1,13 @@
 'use client'
-import { signOut, useSession } from 'next-auth/react'
-import React, {  useState } from 'react'
+import { signOut } from 'next-auth/react'
+import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { HiPencil } from "react-icons/hi2";
 import { useRouter } from 'next/navigation';
+import { userDataContext } from '@/context/UserContext';
 function Page() {
   
-const {data}=useSession()
+const data=useContext(userDataContext)
   const router =useRouter()
   const [loading,setLoading]=useState(false)
 
